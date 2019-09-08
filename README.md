@@ -17,3 +17,12 @@ Fetch Blockchain transactins and store in database.
  2. `npm install`
  3. `ng serve`
  4. Open URL in browser `http://localhost:4200`
+
+##### Follow these steps to fetch Blockchain transactions
+1. Open this URL https://www.blockchain.com/explorer?currency=BTC&stat=blocks
+2. Clock on Block Hash Code and open and copy the block hash code
+3. Go to the browser `http://localhost:4200` and paste the code and click submit
+
+##### Follow these steps to Search Transactions in System
+1. Click on `Search Transactions in System`
+2. Select date range to filter record `Date From` and `Date To` and submit
