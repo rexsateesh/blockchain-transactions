@@ -1,0 +1,21 @@
+<app-dashboard></app-dashboard>
+<div class="example-container mat-elevation-z8">
+  <form class="wrap">
+    <h2>Fetch Blockchain Transactions</h2>
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Blockchain's Block Hash Code" [formControl]="blockHash" [errorStateMatcher]="matcher">
+      <mat-hint>Please enter Blockhain's block hash code. E.g. 00000000000000000000f86d904b8dd7d5c876c58ae743e8a6a7d07d31b13634</mat-hint>
+      <mat-error *ngIf="!blockHash.hasError('required')">
+        Please enter a valid Blockchain's block hash code
+      </mat-error>
+      <mat-error *ngIf="blockHash.hasError('required')">
+        Blockchain block hash code is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="search-btn" (click)="onSubmit()" [disabled]="isFetching">Fetch Blockchain Transactions</button>
+
+    <mat-spinner *ngIf="isFetching"></mat-spinner>
+  </form>
+</div>

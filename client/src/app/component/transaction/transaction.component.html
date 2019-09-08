@@ -1,0 +1,63 @@
+<app-dashboard></app-dashboard>
+<div class="example-container mat-elevation-z8">
+  <div class="wrap">
+    <h2>Search Transactions in System</h2>
+    <div class="left-section">
+      <form [formGroup]="form">
+        <mat-form-field>
+          <input matInput [matDatepicker]="pickerFrom" placeholder="From" formControlName="dateFrom">
+          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFrom></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="date-to">
+          <input matInput [matDatepicker]="pickerTo" placeholder="To" formControlName="dateTo">
+          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+          <mat-datepicker #pickerTo></mat-datepicker>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="search-btn" (click)="onSearchSubmit()" [disabled]="isLoadingResults">Search</button>
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+      </form>
+    </div>
+
+    <div class="right-section">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="example-table-container">
+    <table mat-table [dataSource]="dataSource" class="example-table" matSort matSortActive="time" matSortDisableClear matSortDirection="desc">
+      <!-- Number Column -->
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef>Weight</th>
+        <td mat-cell *matCellDef="let row">{{row.weight}}</td>
+      </ng-container>
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="size">
+        <th mat-header-cell *matHeaderCellDef>Size</th>
+        <td mat-cell *matCellDef="let row">{{row.size}}</td>
+      </ng-container>
+
+      <!-- State Column -->
+      <ng-container matColumnDef="hash">
+        <th mat-header-cell *matHeaderCellDef>Transaction ID</th>
+        <td mat-cell *matCellDef="let row">{{row.hash}}</td>
+      </ng-container>
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Date</th>
+        <td mat-cell *matCellDef="let row">{{row.time | date}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+</div>
